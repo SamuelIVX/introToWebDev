@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab4</title>
+
+    <script>
+        var name, itemRequested, numItems;
+        var date = new Date();
+        var month = date.getMonth() + 1;
+        var day = date.getDate();
+        var year = date.getFullYear();
+        var hour = date.getHours();
+
+        document.writeln("<h1>Lab 4 - Intro to Js</h1>")
+
+        window.alert("Welcome to Sam's Diner!")
+        name = window.prompt("What is your name?")
+        if (hour < 12){
+            document.writeln(`<h2>Good Morning ${name}, thank you for ordering!</h2>`)
+        } else if (hour < 18){
+            document.writeln(`<h2>Good Afternoon ${name}, thank you for ordering!</h2>`)
+
+        } else {
+            document.writeln(`<h2>Good Evening ${name}, thank you for ordering!</h2>`)
+
+        }
+        itemRequested = window.prompt(`Hello ${name}, please pick any item you would like to have!`)
+
+        while (!(numItems >= 1 && numItems <= 99)){
+            numItems = parseInt(window.prompt("Choose the quantity amount for that item between 1-99"))
+        }
+
+        document.writeln(`<h3>So ${name}, you would like to have ${numItems} orders of ${itemRequested}</h3>`)
+        document.writeln(`<h3>Expected arrival time: ${month}/${day+7}/${year}</h3>`)
+
+        document.writeln("<h4>Psst...refresh the page to see the prompts again!</h4>")
+    </script>
+</head>
+<body>
+
+</body>
+</html>
