@@ -32,6 +32,11 @@
         </div>
     </nav>
 
+    <div align=center class="container">
+        <h1 class="display-4">Lab 4 - Intro to Js</h1>
+        <p class="lead">Introduction to Web Development</p>
+      </div>
+
     <script>
         var name, itemRequested, numItems;
         var date = new Date();
@@ -39,8 +44,6 @@
         var day = date.getDate();
         var year = date.getFullYear();
         var hour = date.getHours();
-
-        document.writeln("<h1>Lab 4 - Intro to Js</h1>")
 
         window.alert("Welcome to Sam's Diner!")
         name = window.prompt("What is your name?")
@@ -59,10 +62,10 @@
             numItems = parseInt(window.prompt("Choose the quantity amount for that item between 1-99."))
         }
 
-        document.writeln(`<h3>So ${name}, you would like to have ${numItems} orders of ${itemRequested}.</h3>`)
-        document.writeln(`<h3>Expected arrival time: ${month}/${day+7}/${year}</h3>`)
+        document.writeln(`<h4>So ${name}, you would like to have ${numItems} orders of ${itemRequested}.</h4>`)
+        document.writeln(`<h4>Expected arrival time: ${month}/${day+7}/${year}</h4>`)
 
-        document.writeln("<h4>Psst...refresh the page to see the prompts again!</h4>")
+        document.writeln("<h6>Psst...refresh the page to see the prompts again!</h6>")
     </script>
 
     <hr/>
