@@ -23,7 +23,6 @@
             var output = "";
             if (person.password.includes('!') && person.password.includes('?'))
             {
-                output = ""
                 formStatus.innerHTML = "";
                 formStatus.style.color = 'green';
                 output += "REGISTRATION SUCCESSFUL<br>" + "Name: " + person.fullName + "<br>" + "Email: " + person.email + "<br>";
@@ -33,7 +32,6 @@
                 output += "Encrypted Password: " + private_password + "<br>" + "Date of Birth: " + person.dob + "<br>";
                 formStatus.innerHTML += output;
             } else {
-                output = ""
                 formStatus.innerHTML = "";
                 formStatus.style.color = 'red';
                 output += "REGISTRATION FAILED<br>" + "Your password did not include special characters: ! and ?";
