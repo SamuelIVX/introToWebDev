@@ -12,16 +12,33 @@
 
     <script>
         function submitForm() {
-            var elements = document.getElementById("myForm").elements;
+            const person = {
+                fullName: document.getElementById("name").value,
+                email: document.getElementById("email").value,
+                password: document.getElementById("psw").value,
+                dob: document.getElementById("dob").value,
+            }
             var formStatus = document.getElementById("status");
-            var elemsArr = Array.from(elements);
-            var result = "REGISTRATION SUCCESSFUL<br>";
-            // document.writeln("REGISTRATION SUCCESSFUl!")
-            elemsArr.forEach((element) => {
-                    result += element.name + ": " + element.value + "<br>";
-            });
-
-            formStatus.innerHTML = result;
+            let private_password = "";
+            var output = "";
+            if (person.password.includes('!') && person.password.includes('?'))
+            {
+                output = ""
+                formStatus.innerHTML = "";
+                formStatus.style.color = 'green';
+                output += "REGISTRATION SUCCESSFUL<br>" + "Name: " + person.fullName + "<br>" + "Email: " + person.email + "<br>";
+                for (let i = 0; i < person.password.length; i++){
+                    private_password += "*";
+                }
+                output += "Encrypted Password: " + private_password + "<br>" + "Date of Birth: " + person.dob + "<br>";
+                formStatus.innerHTML += output;
+            } else {
+                output = ""
+                formStatus.innerHTML = "";
+                formStatus.style.color = 'red';
+                output += "REGISTRATION FAILED<br>" + "Your password did not include special characters: ! and ?";
+                formStatus.innerHTML = output
+            }
         }
     </script>
 </head>
@@ -70,16 +87,18 @@
           <input type="text" placeholder="Enter Email" name="email" id="email" required>
       
           <label for="psw"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+          <input type="password" placeholder="Enter Password (Must include ! and ?)" name="psw" id="psw" required>
       
           <label for="D.O.B"><b>Date of Birth</b></label>
-          <input type="text" placeholder="Enter D.O.B" name="D.O.B" id="D.O.B" required>
+          <input type="text" placeholder="Enter D.O.B" name="dob" id="dob" required>
           <hr>
           <p>By subscribing to our newsletter and automated emails, you agree to our <a href="#">Terms & Privacy</a>.</p>
       
           <button type="button" class="registerbtn" onClick="submitForm()">Register</button>
         </div>
-        <h2 id="status"></h2>
+        <h2 id="status" align="center"></h2>
+
+
         <!-- Include Bootstrap v5.3.3 JavaScript Bundle (includes Popper.js and Bootstrap's JavaScript) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
