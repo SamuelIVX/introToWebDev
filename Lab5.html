@@ -9,11 +9,26 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lab5</title>
+
+    <script>
+        function submitForm() {
+            var elements = document.getElementById("myForm").elements;
+            var formStatus = document.getElementById("status");
+            var elemsArr = Array.from(elements);
+            var result = "REGISTRATION SUCCESSFUL<br>";
+            // document.writeln("REGISTRATION SUCCESSFUl!")
+            elemsArr.forEach((element) => {
+                    result += element.name + ": " + element.value + "<br>";
+            });
+
+            formStatus.innerHTML = result;
+        }
+    </script>
 </head>
 <body>
 
-     <!-- NAVBAR -->
-     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <!---------------- NAVBAR ---------------->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand mb-0 h1">Navbar</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -39,12 +54,13 @@
         <p class="lead">Introduction to Web Development</p>
     </div>
 
-    <form action="/action_page.php">
+    <!---------------- FORM ---------------->
+    <form id="myForm">
         <div class="container">
             <div align="center">
-                <h1>Thank you for your interest in <b>ByteFlow</b>!</h1>
-                <h5>The best product for data processing, networking, and cloud solutions!</h5>
-                <p>Please fill in this form to receive news about future updates and changes. (All fields must be filled out accordingly).</p>
+                <h1 style="color:green">Thank you for your interest in <b style="color:greenyellow">ByteFlow</b>!</h1>
+                <h5 style="color:lightgreen">The best product for data processing, networking, and cloud solutions!</h5>
+                <p style="color:gray">Please fill in this form to receive news about future updates and changes. (All fields must be filled out accordingly).</p>
                 <hr>      
             </div>
           <label for="name"><b>Full Name</b></label>
@@ -56,15 +72,15 @@
           <label for="psw"><b>Password</b></label>
           <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
       
-          <label for="psw-repeat"><b>Date of Birth</b></label>
+          <label for="D.O.B"><b>Date of Birth</b></label>
           <input type="text" placeholder="Enter D.O.B" name="D.O.B" id="D.O.B" required>
           <hr>
           <p>By subscribing to our newsletter and automated emails, you agree to our <a href="#">Terms & Privacy</a>.</p>
       
-          <button type="submit" class="registerbtn">Register</button>
+          <button type="button" class="registerbtn" onClick="submitForm()">Register</button>
         </div>
-    
-    <!-- Include Bootstrap v5.3.3 JavaScript Bundle (includes Popper.js and Bootstrap's JavaScript) -->
+        <h2 id="status"></h2>
+        <!-- Include Bootstrap v5.3.3 JavaScript Bundle (includes Popper.js and Bootstrap's JavaScript) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
