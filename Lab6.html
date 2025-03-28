@@ -12,17 +12,29 @@
 </head>
 
 <script>
+
     async function fetchData() {
-        const url = 'https://brianobruno.github.io/cats.json';
+        const url = 'https://brianobruno.github.io/cats.json'; 
         const response = await fetch(url);
         const data = await response.json();
+
+
         let output = "";
         const array = Array.from(data.facts)
         array.forEach(key => {
             output += `<tr><th scope="row">${key.factId}</th><td>${key.text}</td></tr>`;
         })
         document.getElementById("table_body").innerHTML = output;
+
     }
+    async function change() {
+        const url = 'https://brianobruno.github.io/cats.json';
+        const response = await fetch(url);
+        const data = await response.json();
+        document.getElementById("picture").innerHTML = `<img id="catImage" src="${data.catPhoto}" height="200" width="240">`;
+        change()
+    }
+
     fetchData();
 </script>
 
@@ -63,15 +75,13 @@
           </tr>
         </thead>
         <tbody id="table_body">
-          <!-- <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-          </tr> -->
         </tbody>
       </table>
 
-      <p id="status"></p>
-      <p id="display"></p>
+      <div id="picture">
+        <img id="catImage" src="https://images.squarespace-cdn.com/content/v1/607f89e638219e13eee71b1e/1684821560422-SD5V37BAG28BURTLIXUQ/michael-sum-LEpfefQf4rU-unsplash.jpg" height="200" width="240">
+        <button type="button" onClick="change()">Change the picture</button>
+    </div>
 
         <!-- Include Bootstrap v5.3.3 JavaScript Bundle (includes Popper.js and Bootstrap's JavaScript) -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
