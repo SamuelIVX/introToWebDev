@@ -17,11 +17,13 @@
                 email: document.getElementById("email").value,
                 password: document.getElementById("psw").value,
                 dob: document.getElementById("dob").value,
-            }
+            }; // Create an object to hold the form data 
             var formStatus = document.getElementById("status");
+
             let private_password = "";
             var output = "";
-            if (person.password.includes('!') && person.password.includes('?'))
+
+            if (person.password.includes('!') && person.password.includes('?')) // Will display SUCCESSFUL or FAILED based on certain conditions for the password
             {
                 formStatus.innerHTML = "";
                 formStatus.style.color = 'green';
@@ -44,7 +46,7 @@
 
     <!---------------- NAVBAR ---------------->
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand mb-0 h1">Navbar</a>
+        <a class="navbar-brand mb-0 h1">WebDev</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -97,6 +99,8 @@
         </div>
         
         <h2 id="status" align="center"></h2>
+        <hr/>
+        March 21st, 2025 | Samuel Hernandez Balderas
 
         <!-- Include Bootstrap v5.3.3 JavaScript Bundle (includes Popper.js and Bootstrap's JavaScript) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

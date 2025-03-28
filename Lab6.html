@@ -14,34 +14,33 @@
 <script>
 
     async function fetchData() {
-        const url = 'https://brianobruno.github.io/cats.json'; 
-        const response = await fetch(url);
-        const data = await response.json();
-
+        const url = 'https://brianobruno.github.io/cats.json'; // Save the url of the API
+        const response = await fetch(url); // Retrieve the response headers
+        const data = await response.json(); // Get the actual data
 
         let output = "";
-        const array = Array.from(data.facts)
+        const array = Array.from(data.facts) // I want to iterate through the facts array within the data
         array.forEach(key => {
-            output += `<tr><th scope="row">${key.factId}</th><td>${key.text}</td></tr>`;
+            output += `<tr><th scope="row">${key.factId}</th><td>${key.text}</td></tr>`; // Access each factId and it's corresponding fact
         })
-        document.getElementById("table_body").innerHTML = output;
+        document.getElementById("table_body").innerHTML = output; // Display it through DOM
 
     }
     async function change() {
-        const url = 'https://brianobruno.github.io/cats.json';
-        const response = await fetch(url);
-        const data = await response.json();
-        document.getElementById("picture").innerHTML = `<img id="catImage" src="${data.catPhoto}" height="200" width="240">`;
-        change()
+        const url = 'https://brianobruno.github.io/cats.json'; // Save the url of the API
+        const response = await fetch(url); // Retrieve the response headers
+        const data = await response.json(); // Get the actual data
+        document.getElementById("picture").innerHTML = `<img id="catImage" src="${data.catPhoto}" height="200" width="240">`; //Replace the entire image
+        change() // This function well only execute when the button is clicked.
     }
-
     fetchData();
 </script>
 
 <body>
+
     <!---------------- NAVBAR ---------------->
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand mb-0 h1">Navbar</a>
+        <a class="navbar-brand mb-0 h1">WebDev</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -62,6 +61,7 @@
         </div>
     </nav>
 
+        <!---------------- TABLE ---------------->
     <div align=center class="container">
         <h1 class="display-4">Lab 6 - Consuming a REST API</h1>
         <p class="lead">Introduction to Web Development</p>
@@ -74,7 +74,7 @@
             <th scope="col">Fact</th>
           </tr>
         </thead>
-        <tbody id="table_body">
+        <tbody id="table_body"> 
         </tbody>
       </table>
 
@@ -82,6 +82,8 @@
         <img id="catImage" src="https://images.squarespace-cdn.com/content/v1/607f89e638219e13eee71b1e/1684821560422-SD5V37BAG28BURTLIXUQ/michael-sum-LEpfefQf4rU-unsplash.jpg" height="200" width="240">
         <button type="button" onClick="change()">Change the picture</button>
     </div>
+    <hr/>
+    March 28th, 2025 | Samuel Hernandez Balderas
 
         <!-- Include Bootstrap v5.3.3 JavaScript Bundle (includes Popper.js and Bootstrap's JavaScript) -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
