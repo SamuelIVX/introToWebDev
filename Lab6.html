@@ -15,8 +15,13 @@
     async function fetchData() {
         const url = 'https://brianobruno.github.io/cats.json';
         const response = await fetch(url);
-        const myObj = await response.json(); // Shortcut for .text() + JSON.parse()
-        console.log(myObj);
+        const data = await response.json();
+        let output = "";
+        const array = Array.from(data.facts)
+        array.forEach(key => {
+            output += `${key.factId} : ${key.text} <br>`;
+        });
+        document.getElementById("display").innerHTML = output;
     }
     fetchData();
 </script>
@@ -49,6 +54,23 @@
         <h1 class="display-4">Lab 6 - Consuming a REST API</h1>
         <p class="lead">Introduction to Web Development</p>
     </div>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">FactId</th>
+            <th scope="col">Fact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+          </tr>
+        </tbody>
+      </table>
+
+    <p id="status"></p>
+    <p id="display"></p>
     
         <!-- Include Bootstrap v5.3.3 JavaScript Bundle (includes Popper.js and Bootstrap's JavaScript) -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
