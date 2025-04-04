@@ -1,12 +1,12 @@
 /* FINAL PROJECT */
 
 .container{
-    padding: 10px;
+    padding: 20px;
 }
 
 #title{
     font-family: Rockwell;
-  }
+}
   
 #description{
     font-family: Perpetua;
@@ -16,7 +16,7 @@
     display: grid; /* Will be a grid style container */
     grid-template-columns: repeat(2, 1fr); /* Creates: [ 1fr ][ 1fr ] */
     gap: 30px; /* Put space between each canvas */
-    max-width: 1400px; /* This is how wide the actual grid is not the charts themselves */
+    max-width: 1200px; /* This is how wide the actual grid is, not the charts themselves */
     margin: 20px auto; /* Center them */
 }
 
@@ -25,21 +25,72 @@
     width: 100%; /* Make the charts as wide as possible WITHIN the bounds of the grids -> [1fr] */
     min-height: 300px; /* Make them smaller */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Make them pop out */
-    padding: 20px; /* This will make them smaller */
+    padding: 10px; /* This will make them smaller */
 }
 
-.content-grid{ /* This is for the grid itself which will contain the actual charts inside */
+.content-grid{ /* This is for the grid itself which will contain the actual news articles inside */
     display: grid; /* Will be a grid style container */
     grid-template-columns: repeat(3, 1fr); /* Creates: [ 1fr ][ 1fr ] */
     gap: 30px; /* Put space between each canvas */
-    max-width: 1400px; /* This is how wide the actual grid is not the charts themselves */
+    max-width: 1200px; /* This is how wide the actual grid is, not the cards themselves */
     margin: 20px auto; /* Center them */
 }
 
+/* @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  } */
+
 .content-container {
+    /* animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0; Start invisible */
     position: relative; 
-    width: 100%; /* Make the charts as wide as possible WITHIN the bounds of the grids -> [1fr] */
-    min-height: 300px; /* Make them smaller */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Make them pop out */
-    padding: 20px; /* This will make them smaller */
+    width: 100%; /* Make the cards as wide as possible WITHIN the bounds of the grids -> [1fr] */
+    min-height: 150px; /* Make them smaller */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px 15px 15px 0px; /* This will make them smaller */
+    border-radius: 5%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.content-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-left: 3px solid lightskyblue;
+}
+
+.image{
+    border-radius: 10%;
+    padding-left: 20px;
+}
+
+.headline{
+    padding-top: 8px;
+    font-size: 15spx;
+    padding-left: 20px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.summary{
+    /* font-size: 13px; */
+    margin-top: 5px;
+    padding-left: 20px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: #555;
+}
+
+.source{
+    font-size: 14px;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-left: 20px;
 }
