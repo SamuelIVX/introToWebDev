@@ -24,6 +24,7 @@
             output += `<tr><th scope="row">${key.factId}</th><td>${key.text}</td></tr>`; // Access each factId and it's corresponding fact
         })
         document.getElementById("table_body").innerHTML = output; // Display it through DOM
+        console.log(data)
 
     }
     async function change() {

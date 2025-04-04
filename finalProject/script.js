@@ -233,3 +233,21 @@ document.addEventListener("DOMContentLoaded", function () {
     // Create the chart
     new Chart(ctx, config);
 });
+
+// -----------------------------------------------------------------------
+
+async function fetchData(){
+    const api_key = "cvnh48hr01qq3c7fa2vgcvnh48hr01qq3c7fa300";
+    const url = `https://finnhub.io/api/v1/news?category=general&token=${api_key}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    
+    const array = data;
+    let output = "";
+    array.forEach(key => {
+        output += `<div class="content-container"> <h1>${key.source}</h1> <h3>${key.headline}</h3> <p>${key.summary}</p> </div>`;
+    })
+    document.getElementById("api-content").innerHTML = output;
+    console.log(data);
+}
+fetchData()
