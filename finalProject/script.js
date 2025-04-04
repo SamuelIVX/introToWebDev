@@ -265,13 +265,27 @@ async function fetchStockData(){
     console.log(data)
 
     let output1 = `<div class="stock-metrics-container" style="background-color:hsl(210, 100%, 98.5%)"> 
-                        <h3>${data.symbol} Key Metrics</h3>
-                        <p>52-Week High: ${data.metric["52WeekHigh"]}</p>
-                        <p>52-Week High Date${data.metric["52WeekHighDate"]}</p>
-                        <p>52-Week Low: ${data.metric["52WeekLow"]}</p>
-                        <p>52-Week Low Date: ${data.metric["52WeekLowDate"]}</p>
-                        <p>52-Week Price Return Daily: ${data.metric["52WeekPriceReturnDaily"]}</p>
-                        <p>Dividend Yield(TTM): ${data.metric["currentDividendYieldTTM"]}</p>                         
+                        <span class="stock-symbol">${data.symbol}</span> <span class="stock-subtitle">- Key Analytics</span>                      
+                        <p class="metric-summary">
+                            <span class="stock-metric-title">52-Week High:</span> 
+                            <span class="stock-metric">${data.metric["52WeekHigh"]}</span> 
+                            <span class="stock-metric-title" style="margin-left: 25%;">52-Week High Date:</span>
+                            <span class="stock-metric">${data.metric["52WeekHighDate"]}</span>
+                        
+                        </p>
+                        
+                        <p class="metric-summary">
+                            <span class="stock-metric-title">52-Week Low:</span> 
+                            <span class="stock-metric">${data.metric["52WeekLow"]}</span> 
+                            <span class="stock-metric-title" style="margin-left: 25%;">52-Week Low Date:</span>
+                            <span class="stock-metric">${data.metric["52WeekLowDate"]}</span>
+                        </p>
+                        <p class="metric-summary">
+                            <span class="stock-metric-title">52-Week Price Return Daily:</span>
+                            <span class="stock-metric">${data.metric["52WeekPriceReturnDaily"]}</span> 
+                            <span class="stock-metric-title" style="margin-left: 20%;">Dividend Yield(TTM):</span>
+                            <span class="stock-metric">${data.metric["currentDividendYieldTTM"]}</span>
+                        </p>
                     </div>`;
                     
     let output2 = "";
