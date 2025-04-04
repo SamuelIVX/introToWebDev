@@ -55,30 +55,3 @@ hr {
 .registerbtn:hover {
   opacity: 1;
 }
-
-/* FINAL PROJECT */
-
-/* This is for the grid itself which will contain the actual charts inside */
-#title{
-  font-family: Rockwell;
-}
-
-#description{
-  font-family: Perpetua;
-}
-
-.charts-grid{
-  display: grid; /* Will be a grid style container */
-  grid-template-columns: repeat(2, 1fr); /* Creates: [ 1fr ][ 1fr ] */
-  gap: 30px; /* Put space between each canvas */
-  max-width: 1400px; /* This is how wide the actual grid is not the charts themselves */
-  margin: 20px auto; /* Center them */
-}
-
-.chartContainer {
-  position: relative; 
-  width: 100%; /* Make the charts as wide as possible WITHIN the bounds of the grids -> [1fr] */
-  min-height: 300px; /* Make them smaller */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Make them pop out */
-  padding: 20px; /* This will make them smaller */
-}
