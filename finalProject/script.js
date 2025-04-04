@@ -263,20 +263,20 @@ async function fetchStockData(){
     const response = await fetch(url);
     const data = await response.json();
     console.log(data)
-    let output = "";
 
-    // let output = `<div class="content-container" style="background-color:hsl(210, 100%, 98.5%)"> 
-    //                     <h3>${data.symbol} Key Metrics</h3>
-    //                     <p>52-Week High: ${data.metric["52WeekHigh"]}</p>
-    //                     <p>52-Week High Date${data.metric["52WeekHighDate"]}</p>
-    //                     <p>52-Week Low: ${data.metric["52WeekLow"]}</p>
-    //                     <p>52-Week Low Date: ${data.metric["52WeekLowDate"]}</p>
-    //                     <p>52-Week Price Return Daily: ${data.metric["52WeekPriceReturnDaily"]}</p>
-    //                     <p>Dividend Yield(TTM): ${data.metric["currentDividendYieldTTM"]}</p>                         
-    //                 </div>`;
-
+    let output1 = `<div class="stock-metrics-container" style="background-color:hsl(210, 100%, 98.5%)"> 
+                        <h3>${data.symbol} Key Metrics</h3>
+                        <p>52-Week High: ${data.metric["52WeekHigh"]}</p>
+                        <p>52-Week High Date${data.metric["52WeekHighDate"]}</p>
+                        <p>52-Week Low: ${data.metric["52WeekLow"]}</p>
+                        <p>52-Week Low Date: ${data.metric["52WeekLowDate"]}</p>
+                        <p>52-Week Price Return Daily: ${data.metric["52WeekPriceReturnDaily"]}</p>
+                        <p>Dividend Yield(TTM): ${data.metric["currentDividendYieldTTM"]}</p>                         
+                    </div>`;
+                    
+    let output2 = "";
     for(let i = 0; i < 5; i++){
-        output += `<div class="content-container" style="background-color:hsl(210, 100%, 98.5%)"> 
+        output2 += `<div class="nested-metrics-container" style="background-color:hsl(210, 100%, 98.5%)"> 
                         <p>Book Value: ${data.series.annual["bookValue"][i].period} | ${data.series.annual["bookValue"][i].v}</p>           
                         <p>Earnings Per Share: ${data.series.annual["eps"][i].period} | ${data.series.annual["eps"][i].v}</p>                       
                         <p>Sales Per Share: ${data.series.annual["salesPerShare"][i].period} | ${data.series.annual["salesPerShare"][i].v}</p>                       
@@ -284,6 +284,7 @@ async function fetchStockData(){
                     </div>`;
     }
 
-    document.getElementById("stocks-content").innerHTML = output;
+    document.getElementById("stocks-content").innerHTML = output1;
+    document.getElementById("array-content").innerHTML = output2;
 }
 fetchStockData()
