@@ -24,7 +24,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="stocks.html">Stock Market</a>
+                <a class="nav-link" href="stocks.html">Company Stocks</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="news.html">News</a>
@@ -32,6 +32,16 @@
             </ul>
         </div>
         </nav>
+          
+        <div align=center class="container">
+            <h1 class="display-4" id="title"> <b style="color:lightskyblue">SEE THE DATA, NOT THE NOISE</b></h1>
+            <p>Search stocks (symbol) to analyze financial health and performance.</p>
+            <input class="search" id="input" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-info" type="submit" onClick="fetchStockData()">Search</button>
+        </div>
+        <div class="content-grid" id="stocks-content">
+                <!-- DATA FETCHED FROM THE API GOES HERE -->
+        </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
