@@ -245,9 +245,13 @@ async function fetchData(){
     const array = data;
     let output = "";
     array.forEach(key => {
-        output += `<div class="content-container"> <h1>${key.source}</h1> <h3>${key.headline}</h3> <p>${key.summary}</p> </div>`;
+        output += `<div class="content-container" style="background-color:hsl(210, 100%, 98.5%)"> 
+                        <a href="${key.url}"><img src=${key.image} alt="" height="240" width="370" class="image"></a>
+                        <h5 class="headline"><b>${key.headline}</b></h5> 
+                        <p class="summary" style="color:#665">${key.summary}</p> 
+                        <p class="source"><b>${key.source}</b></p>
+                    </div>`;
     })
     document.getElementById("api-content").innerHTML = output;
-    console.log(data);
 }
 fetchData()
