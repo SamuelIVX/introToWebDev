@@ -243,7 +243,7 @@ async function fetchNewsData(){
     const data = await response.json();
     
     let output = "";
-    data.forEach(key => {
+    data.slice(0,21).forEach(key => { // Only grab the first 21 news articles
         output += `<div class="content-container" style="background-color:hsl(210, 100%, 98.5%)"> 
                         <a href="${key.url}"><img src=${key.image} alt="" height="240" width="370" class="image"></a>
                         <h5 class="headline"><b>${key.headline}</b></h5> 
@@ -258,8 +258,7 @@ fetchNewsData()
 async function fetchStockData(){
     const api_key = "cvnh48hr01qq3c7fa2vgcvnh48hr01qq3c7fa300";
     const symbol = document.getElementById("input").value;
-    const url = `https://finnhub.io/api/v1/stock/metric?symbol=AAPL&metric=all&token=${api_key}`;
-    // const url = `https://finnhub.io/api/v1/stock/metric?symbol=${symbol}&metric=all&token=${api_key}`;
+    const url = `https://finnhub.io/api/v1/stock/metric?symbol=${symbol}&metric=all&token=${api_key}`;
     const response = await fetch(url);
     const data = await response.json();
     let output1 = `<div class="stock-metrics-container" style="background-color:hsl(210, 100%, 98.5%)"> 
@@ -285,19 +284,8 @@ async function fetchStockData(){
                             <span class="stock-metric">${data.metric["currentDividendYieldTTM"]}</span>
                         </p>
                     </div>`;
-                    
-    // let output2 = "";
-    // for(let i = 0; i < 5; i++){
-    //     output2 += `<div class="nested-metrics-container" style="background-color:hsl(210, 100%, 98.5%)"> 
-    //                     <p>Book Value: ${data.series.annual["bookValue"][i].period} | ${data.series.annual["bookValue"][i].v}</p>           
-    //                     <p>Earnings Per Share: ${data.series.annual["eps"][i].period} | ${data.series.annual["eps"][i].v}</p>                       
-    //                     <p>Sales Per Share: ${data.series.annual["salesPerShare"][i].period} | ${data.series.annual["salesPerShare"][i].v}</p>                       
-    //                     <p>Gross Margin: ${data.series.annual["grossMargin"][i].period} | ${data.series.annual["grossMargin"][i].v}</p>   
-    //                 </div>`;
-    // }
 
     document.getElementById("stocks-content").innerHTML = output1;
-    // document.getElementById("array-content").innerHTML = output2;
     generateCharts(data) // I decided to call the generateCharts() function within this function for better readability and structuring.
 }
 fetchStockData()
@@ -308,7 +296,7 @@ function generateCharts(data) {
     let colors = ['#32648C33', 'rgba(180, 50, 50, 0.2)', 'rgba(40, 140, 80, 0.2)', 'rgba(200, 170, 50, 0.2)', 'rgba(190, 80, 140, 0.2)', 'rgba(120, 80, 50, 0.2)', 
         'rgba(200, 100, 40, 0.2)', 'rgba(40, 40, 40, 0.2)', 'rgba(110, 180, 40, 0.2)', 'rgba(110, 60, 140, 0.2)	'];
 
-    const ctx1 = document.getElementById('stock-chart1').getContext('2d'); 
+    const ctx1 = document.getElementById('stock-chart1').getContext('2d')   ; 
     const ctx2 = document.getElementById('stock-chart2').getContext('2d'); 
     const ctx3 = document.getElementById('stock-chart3').getContext('2d'); 
     const ctx4 = document.getElementById('stock-chart4').getContext('2d'); 
