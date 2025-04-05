@@ -1,3 +1,8 @@
+document.addEventListener('DOMContentLoaded', () => {
+    fetchStockData();
+    fetchNewsData();
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const ctx = document.getElementById('chart').getContext('2d');
 
@@ -233,7 +238,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Create the chart
     new Chart(ctx, config);
 });
-
+});
 // -----------------------------------------------------------------------
 
 async function fetchNewsData(){
@@ -441,10 +446,3 @@ function generateCharts(data) {
         },
     })
 }
-
-
-
-// Make sure the browser has finished loading and the HTML structure is parsed
-document.addEventListener('DOMContentLoaded', () => {
-    fetchStockData(); // Then called the function to fetch the data
-});
