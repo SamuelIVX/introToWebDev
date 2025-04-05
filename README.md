@@ -10,3 +10,5 @@
 [Lab5](https://samuelivx.github.io/introToWebDev/Lab5.html)
 
 [Lab6](https://samuelivx.github.io/introToWebDev/Lab6.html)
+
+[Final Project](https://samuelivx.github.io/introToWebDev/finalProject/index.html)
