@@ -1,5 +1,10 @@
 /* FINAL PROJECT */
 
+.homepage-container{
+  margin-top: 20%;
+  justify-content: center;
+}
+
 .container{
     padding: 20px;
 }

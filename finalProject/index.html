@@ -10,52 +10,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Final Project</title>
 </head>
-<body>
 
-    <!---------------- NAVBAR ---------------->
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ADD8E6;">
-    <a class="navbar-brand" href="index.html">
-        <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link" href="stocks.html">Company Stocks</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="news.html">News</a>
-        </li>
-        </ul>
-    </div>
-    </nav>
+<body style="background-color: rgba(75, 192, 192, 0.2)">
 
-    <div align=center class="container">
+    <div align=center class="homepage-container">
         <h1 class="display-4" id="title"> <b style="color:lightskyblue">PRISM</b></h1>
-        <p class="lead" id="description"><b style="color:lightblue">No clutter, just markets. Track stocks and news in one place.</b></p>
-    </div>
-
-    <div class="charts-grid">
-        <div class="chartContainer">
-            <canvas id="chart" class="chartSection"></canvas>
-        </div>
-
-        <div class="chartContainer">
-            <canvas id="chart2" class="chartSection"></canvas>
-        </div>
-
-        <div class="chartContainer">
-            <canvas id="chart3" class="chartSection"></canvas>
-        </div>
+        <p class="lead" id="description"><b style="color:#665">No clutter, just markets. Track stocks and news in one place.</b></p>
         
-        <div class="chartContainer">
-            <canvas id="chart4" class="chartSection"></canvas>
+        <div class="button-group">
+            <button class="btn btn-outline-info " onClick="window.location.href='stocks.html'">Company Stocks</button>
+            <button class="btn btn-outline-info" onClick="window.location.href='news.html'">Stock-Related News</button>
         </div>
     </div>
 
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>     
      <script src="script.js" defer></script>
 </body>
+
 </html>

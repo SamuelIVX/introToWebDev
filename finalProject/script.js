@@ -28,7 +28,7 @@ fetchNewsData()
 
 async function fetchStockData(){
     const api_key = "REDACTED_API_KEY";
-    const symbol = document.getElementById("input").value;
+    const symbol = document.getElementById("input").value.toUpperCase();
     const url = `https://finnhub.io/api/v1/stock/metric?symbol=${symbol}&metric=all&token=${api_key}`;
     const response = await fetch(url);
     const data = await response.json();
