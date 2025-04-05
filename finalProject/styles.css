@@ -28,6 +28,12 @@
     padding: 10px; /* This will make them smaller */
 }
 
+.chartContainer:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-left: 3px solid lightskyblue;
+}
+
 .content-grid{ /* This is for the grid itself which will contain the actual news articles inside */
     display: grid; /* Will be a grid style container */
     grid-template-columns: repeat(3, 1fr); /* Creates: [ 1fr ][ 1fr ] */

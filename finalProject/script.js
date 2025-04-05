@@ -262,8 +262,6 @@ async function fetchStockData(){
     // const url = `https://finnhub.io/api/v1/stock/metric?symbol=${symbol}&metric=all&token=${api_key}`;
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data)
-
     let output1 = `<div class="stock-metrics-container" style="background-color:hsl(210, 100%, 98.5%)"> 
                         <span class="stock-symbol">${data.symbol}</span> <span class="stock-subtitle">- Key Analytics</span>                      
                         <p class="metric-summary">
@@ -288,17 +286,177 @@ async function fetchStockData(){
                         </p>
                     </div>`;
                     
-    let output2 = "";
-    for(let i = 0; i < 5; i++){
-        output2 += `<div class="nested-metrics-container" style="background-color:hsl(210, 100%, 98.5%)"> 
-                        <p>Book Value: ${data.series.annual["bookValue"][i].period} | ${data.series.annual["bookValue"][i].v}</p>           
-                        <p>Earnings Per Share: ${data.series.annual["eps"][i].period} | ${data.series.annual["eps"][i].v}</p>                       
-                        <p>Sales Per Share: ${data.series.annual["salesPerShare"][i].period} | ${data.series.annual["salesPerShare"][i].v}</p>                       
-                        <p>Gross Margin: ${data.series.annual["grossMargin"][i].period} | ${data.series.annual["grossMargin"][i].v}</p>   
-                    </div>`;
-    }
+    // let output2 = "";
+    // for(let i = 0; i < 5; i++){
+    //     output2 += `<div class="nested-metrics-container" style="background-color:hsl(210, 100%, 98.5%)"> 
+    //                     <p>Book Value: ${data.series.annual["bookValue"][i].period} | ${data.series.annual["bookValue"][i].v}</p>           
+    //                     <p>Earnings Per Share: ${data.series.annual["eps"][i].period} | ${data.series.annual["eps"][i].v}</p>                       
+    //                     <p>Sales Per Share: ${data.series.annual["salesPerShare"][i].period} | ${data.series.annual["salesPerShare"][i].v}</p>                       
+    //                     <p>Gross Margin: ${data.series.annual["grossMargin"][i].period} | ${data.series.annual["grossMargin"][i].v}</p>   
+    //                 </div>`;
+    // }
 
     document.getElementById("stocks-content").innerHTML = output1;
-    document.getElementById("array-content").innerHTML = output2;
+    // document.getElementById("array-content").innerHTML = output2;
+    generateCharts(data) // I decided to call the generateCharts() function within this function for better readability and structuring.
 }
 fetchStockData()
+
+function generateCharts(data) {
+    if (!data.series?.annual) return;
+
+    let colors = ['#32648C33', 'rgba(180, 50, 50, 0.2)', 'rgba(40, 140, 80, 0.2)', 'rgba(200, 170, 50, 0.2)', 'rgba(190, 80, 140, 0.2)', 'rgba(120, 80, 50, 0.2)', 
+        'rgba(200, 100, 40, 0.2)', 'rgba(40, 40, 40, 0.2)', 'rgba(110, 180, 40, 0.2)', 'rgba(110, 60, 140, 0.2)	'];
+
+    const ctx1 = document.getElementById('stock-chart1').getContext('2d'); 
+    const ctx2 = document.getElementById('stock-chart2').getContext('2d'); 
+    const ctx3 = document.getElementById('stock-chart3').getContext('2d'); 
+    const ctx4 = document.getElementById('stock-chart4').getContext('2d'); 
+    
+    // Destroy previous chart if it exists
+    if (window.bookValueChart) {
+        window.bookValueChart.destroy();
+    }
+    if (window.EarningsPerShareChart) {
+        window.EarningsPerShareChart.destroy();
+    }
+    if (window.SalesPerShareChart) {
+        window.SalesPerShareChart.destroy();
+    }
+    if (window.grossMarginChart) {
+        window.grossMarginChart.destroy();
+    }
+
+    const bookValueData = data.series.annual.bookValue; // Enter the bookValue array
+    //The bookValue array has two values: period(date) & value(at that current date)
+    const years1 = bookValueData.map(item => item.period.substring(0, 4)).reverse(); // Only grab the year
+    const values1 = bookValueData.map(item => item.v).reverse(); 
+    
+    
+    // The creation of the actual charts
+    window.bookValueChart = new Chart(ctx1, {
+        type: 'line',
+        data: {
+            labels: years1,
+            datasets: [{
+                label: 'Book Value Per Share ($)',
+                data: values1,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                tension: 0.3,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    title: { display: true, text: 'Book Value ($)' }
+                },
+                x: {
+                    title: { display: true, text: 'Year' }
+                }
+            }
+        }
+    });
+
+    const epsData = data.series.annual.eps; // Enter the eps array
+    const years2 = epsData.map(item => item.period.substring(0, 4)).reverse(); // Only grab the year
+    const values2 = epsData.map(item => item.v).reverse(); 
+
+    window.EarningsPerShareChart = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: years2,
+            datasets: [{
+                label: 'Earnings Per Share ($)',
+                data: values2,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                tension: 0.3,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    title: { display: true, text: 'Share Value ($)' }
+                },
+                x: {
+                    title: { display: true, text: 'Year' }
+                }
+            }
+        }
+    })
+
+    const spsData = data.series.annual.salesPerShare; // Enter the eps array
+    const years3 = spsData.slice(0,10).map(item => item.period.substring(0, 4)).reverse(); // Only grab the first 10 elements of the array
+    const values3 = spsData.slice(0,10).map(item => item.v).reverse(); // Only grab the first 10 elements of the array
+
+    window.SalesPerShareChart = new Chart(ctx3, {
+        type: 'pie',
+        data: {
+            labels: years3,
+            datasets: [{
+                label: 'Sales Per Share ($)',
+                data: values3,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: colors, 
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Sales Per Share ($)',
+                },
+            },
+        },
+    })
+
+    const grossMarginData = data.series.annual.grossMargin; // Enter the eps array
+    const years4 = grossMarginData.slice(0,10).map(item => item.period.substring(0, 4)).reverse(); // Only grab the first 10 elements of the array
+    const values4 = grossMarginData.slice(0,10).map(item => item.v).reverse(); // Only grab the first 10 elements of the array
+
+    window.grossMarginChart = new Chart(ctx4, {
+        type: 'polarArea',
+        data: {
+            labels: years4,
+            datasets: [{
+                label: 'Gross Margin($)',
+                data: values4,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: colors, 
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                r: {
+                  pointLabels: {
+                    display: true,
+                    centerPointLabels: true,
+                    font: {
+                      size: 14
+                    }
+                  }
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Gross Margin ($)',
+                },
+            },
+        },
+    })
+}
+
+
+
+// Make sure the browser has finished loading and the HTML structure is parsed
+document.addEventListener('DOMContentLoaded', () => {
+    fetchStockData(); // Then called the function to fetch the data
+});
