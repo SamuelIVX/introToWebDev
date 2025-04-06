@@ -36,7 +36,7 @@ async function fetchStockData(){
                         <span class="stock-symbol">${data.symbol}</span> <span class="stock-subtitle">- Key Analytics</span>                      
                         <p class="metric-summary">
                             <span class="stock-metric-title">52-Week High:</span> 
-                            <span class="stock-metric">${data.metric["52WeekHigh"]}</span> 
+                            <span class="stock-metric">$${data.metric["52WeekHigh"].toFixed(2)}</span> 
                             <span class="stock-metric-title" style="margin-left: 25%;">52-Week High Date:</span>
                             <span class="stock-metric">${data.metric["52WeekHighDate"]}</span>
                         
@@ -44,15 +44,15 @@ async function fetchStockData(){
                         
                         <p class="metric-summary">
                             <span class="stock-metric-title">52-Week Low:</span> 
-                            <span class="stock-metric">${data.metric["52WeekLow"]}</span> 
+                            <span class="stock-metric">$${data.metric["52WeekLow"].toFixed(2)}</span> 
                             <span class="stock-metric-title" style="margin-left: 25%;">52-Week Low Date:</span>
                             <span class="stock-metric">${data.metric["52WeekLowDate"]}</span>
                         </p>
                         <p class="metric-summary">
                             <span class="stock-metric-title">52-Week Price Return Daily:</span>
-                            <span class="stock-metric">${data.metric["52WeekPriceReturnDaily"]}</span> 
+                            <span class="stock-metric">${data.metric["52WeekPriceReturnDaily"].toFixed(2)}%</span> 
                             <span class="stock-metric-title" style="margin-left: 20%;">Dividend Yield(TTM):</span>
-                            <span class="stock-metric">${data.metric["currentDividendYieldTTM"]}</span>
+                            <span class="stock-metric">${data.metric["currentDividendYieldTTM"].toFixed(2)}%</span>
                         </p>
                     </div>`;
 
@@ -128,7 +128,7 @@ function generateCharts(data) {
         data: {
             labels: years2,
             datasets: [{
-                label: 'Earnings Per Share ($)',
+                label: 'Earnings Per Share (%)',
                 data: values2,
                 borderColor: 'rgba(75, 192, 192, 1)',
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
@@ -151,14 +151,14 @@ function generateCharts(data) {
 
     const spsData = data.series.annual.salesPerShare; // Enter the eps array
     const years3 = spsData.slice(0,10).map(item => item.period.substring(0, 4)).reverse(); // Only grab the first 10 elements of the array
-    const values3 = spsData.slice(0,10).map(item => item.v).reverse(); // Only grab the first 10 elements of the array
+    const values3 = spsData.slice(0,10).map(item => item.v.toFixed(2)).reverse(); // Only grab the first 10 elements of the array
 
     window.SalesPerShareChart = new Chart(ctx3, {
         type: 'pie',
         data: {
             labels: years3,
             datasets: [{
-                label: 'Sales Per Share ($)',
+                label: 'Sales Per Share (%)',
                 data: values3,
                 borderColor: 'rgba(75, 192, 192, 1)',
                 backgroundColor: colors, 
@@ -177,14 +177,14 @@ function generateCharts(data) {
 
     const grossMarginData = data.series.annual.grossMargin; // Enter the eps array
     const years4 = grossMarginData.slice(0,10).map(item => item.period.substring(0, 4)).reverse(); // Only grab the first 10 elements of the array
-    const values4 = grossMarginData.slice(0,10).map(item => item.v).reverse(); // Only grab the first 10 elements of the array
+    const values4 = grossMarginData.slice(0,10).map(item => item.v * 100).reverse(); // Only grab the first 10 elements of the array
 
     window.grossMarginChart = new Chart(ctx4, {
         type: 'polarArea',
         data: {
             labels: years4,
             datasets: [{
-                label: 'Gross Margin($)',
+                label: 'Gross Margin(%)',
                 data: values4,
                 borderColor: 'rgba(75, 192, 192, 1)',
                 backgroundColor: colors, 
