@@ -32,6 +32,9 @@ async function fetchStockData(){
     const url = `https://finnhub.io/api/v1/stock/metric?symbol=${symbol}&metric=all&token=${api_key}`;
     const response = await fetch(url);
     const data = await response.json();
+    const currentDividendYieldTTM = data?.metric?.currentDividendYieldTTM != null 
+                                    ? data.metric.currentDividendYieldTTM.toFixed(2) + "%" 
+                                    : 'N/A';
     let output1 = `<div class="stock-metrics-container" style="background-color:hsl(210, 100%, 98.5%)"> 
                         <span class="stock-symbol">${data.symbol}</span> <span class="stock-subtitle">- Key Analytics</span>                      
                         <p class="metric-summary">
@@ -39,7 +42,7 @@ async function fetchStockData(){
                             <span class="stock-metric">$${data.metric["52WeekHigh"].toFixed(2)}</span> 
                             <span class="stock-metric-title" style="margin-left: 25%;">52-Week High Date:</span>
                             <span class="stock-metric">${data.metric["52WeekHighDate"]}</span>
-                        
+
                         </p>
                         
                         <p class="metric-summary">
@@ -52,7 +55,7 @@ async function fetchStockData(){
                             <span class="stock-metric-title">52-Week Price Return Daily:</span>
                             <span class="stock-metric">${data.metric["52WeekPriceReturnDaily"].toFixed(2)}%</span> 
                             <span class="stock-metric-title" style="margin-left: 20%;">Dividend Yield(TTM):</span>
-                            <span class="stock-metric">${data.metric["currentDividendYieldTTM"].toFixed(2)}%</span>
+                            <span class="stock-metric">${currentDividendYieldTTM}</span>
                         </p>
                     </div>`;
 
