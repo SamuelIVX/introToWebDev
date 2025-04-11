@@ -51,35 +51,28 @@ async function fetchNewsData(filterType){
 //     );
 
     const api_key = "cvnh48hr01qq3c7fa2vgcvnh48hr01qq3c7fa300";
-    try {
-        const url = `https://finnhub.io/api/v1/news?category=${filterType}&token=${api_key}`;
-        const response = await fetch(url);
-        const data = await response.json();
-        
-        let output = "";
-        data.slice(0, 30).forEach(key => {
-            output += `
-                <div class="content-container" style="background-color:hsl(210, 100%, 98.5%)">
-                    <a href="${key.url}"><img src="${key.image}" alt="" height="240" width="370" class="image"></a>
-                    <h5 class="headline"><b>${key.headline}</b></h5>
-                    <p class="summary" style="color:#665">${key.summary}</p>
-                    <p class="source"><b>${key.source}</b></p>
-                </div>
-            `;
-        });
-        
-        document.getElementById("api-content").innerHTML = output;
-    } catch (error) {
-        console.error("Failed to fetch news:", error);
-        document.getElementById("api-content").innerHTML = `<p class="error">Failed to load news.</p>`;
-    }
+    const url = `https://finnhub.io/api/v1/news?category=${filterType}&token=${api_key}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    
+    let output = "";
+    data.slice(0, 30).forEach(key => {
+        output += `
+            <div class="content-container" style="background-color:hsl(210, 100%, 98.5%)">
+                <a href="${key.url}"><img src="${key.image}" alt="" height="240" width="370" class="image"></a>
+                <h5 class="headline"><b>${key.headline}</b></h5>
+                <p class="summary" style="color:#665">${key.summary}</p>
+                <p class="source"><b>${key.source}</b></p>
+            </div>
+        `;
+    });
+    
+    document.getElementById("api-content").innerHTML = output;
 }
 fetchNewsData()
 
 async function fetchStockData(){
     const api_key = "cvnh48hr01qq3c7fa2vgcvnh48hr01qq3c7fa300";
-
-    try {
     const symbol = document.getElementById("input").value.toUpperCase();
     const url = `https://finnhub.io/api/v1/stock/metric?symbol=${symbol}&metric=all&token=${api_key}`;
     const response = await fetch(url);
@@ -114,9 +107,6 @@ async function fetchStockData(){
 
     document.getElementById("stocks-content").innerHTML = output1;
     generateCharts(data) // I decided to call the generateCharts() function within this function so I don't call the API multiple times.
-    } catch(error) {
-        console.error("Failed to fetch stock data:", error);
-    }
 }
 fetchStockData()
 
