@@ -29,14 +29,13 @@
     position: relative; 
     width: 100%; /* Make the charts as wide as possible WITHIN the bounds of the grids -> [1fr] */
     min-height: 300px; /* Make them smaller */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Make them pop out */
     padding: 10px; /* This will make them smaller */
 }
 
 .chartContainer:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    border-left: 3px solid lightskyblue;
+    border: 3px solid lightskyblue;
 }
 
 .content-grid{ /* This is for the grid itself which will contain the actual news articles inside */
@@ -113,7 +112,6 @@
     position: relative; 
     width: 100%; /* Make the cards as wide as possible WITHIN the bounds of the grids -> [1fr] */
     min-height: 150px; /* Make them smaller */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 15px 15px 15px 0px; /* This will make them smaller */
     border-radius: 5%;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -122,7 +120,7 @@
 .content-container:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    border-left: 3px solid lightskyblue;
+    border: 3px solid lightskyblue;
 }
 
 .image{
@@ -153,4 +151,10 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-left: 20px;
+}
+
+.error{
+    align-items: center;
+    color: red;
+    font-weight: bold;
 }
