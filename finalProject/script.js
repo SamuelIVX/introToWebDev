@@ -1,28 +1,37 @@
 /*
-    Before running these functions, I want to make sure browers is fully loaded and the HTML file is completely parsed.
-    That way, I prevent my functions from selectin HTML elements that are not yet fully loaded.
+    Before running these functions, I want to make sure the browser is fully loaded and the HTML file is completely parsed.
+    That way, I prevent my functions from selecting HTML elements that are not fully loaded yet.
 */
 document.addEventListener('DOMContentLoaded', () => {
     fetchStockData();
     fetchNewsData();
 });
 
-async function fetchNewsData(){
+async function fetchNewsData(filterType){
     const api_key = "cvnh48hr01qq3c7fa2vgcvnh48hr01qq3c7fa300";
-    const url = `https://finnhub.io/api/v1/news?category=general&token=${api_key}`;
-    const response = await fetch(url);
-    const data = await response.json();
     
-    let output = "";
-    data.slice(0,21).forEach(key => { // Only grab the first 21 news articles
-        output += `<div class="content-container" style="background-color:hsl(210, 100%, 98.5%)"> 
-                        <a href="${key.url}"><img src=${key.image} alt="" height="240" width="370" class="image"></a>
-                        <h5 class="headline"><b>${key.headline}</b></h5> 
-                        <p class="summary" style="color:#665">${key.summary}</p> 
-                        <p class="source"><b>${key.source}</b></p>
-                    </div>`;
-    })
-    document.getElementById("api-content").innerHTML = output;
+    try {
+        const url = `https://finnhub.io/api/v1/news?category=${filterType.toLowerCase()}&token=${api_key}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        let output = "";
+        data.slice(0, 30).forEach(key => {
+            output += `
+                <div class="content-container" style="background-color:hsl(210, 100%, 98.5%)">
+                    <a href="${key.url}"><img src="${key.image}" alt="" height="240" width="370" class="image"></a>
+                    <h5 class="headline"><b>${key.headline}</b></h5>
+                    <p class="summary" style="color:#665">${key.summary}</p>
+                    <p class="source"><b>${key.source}</b></p>
+                </div>
+            `;
+        });
+        
+        document.getElementById("api-content").innerHTML = output;
+    } catch (error) {
+        console.error("Failed to fetch news:", error);
+        document.getElementById("api-content").innerHTML = `<p class="error">Failed to load news. Try again later.</p>`;
+    }
 }
 fetchNewsData()
 
