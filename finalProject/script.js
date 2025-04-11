@@ -44,6 +44,7 @@ async function fetchStockData(){
     const currentDividendYieldTTM = data?.metric?.currentDividendYieldTTM != null 
                                     ? data.metric.currentDividendYieldTTM.toFixed(2) + "%" 
                                     : 'N/A';
+                                    
     let output1 = `<div class="stock-metrics-container" style="background-color:hsl(210, 100%, 98.5%)"> 
                         <span class="stock-symbol">${data.symbol}</span> <span class="stock-subtitle">- Key Analytics</span>                      
                         <p class="metric-summary">
