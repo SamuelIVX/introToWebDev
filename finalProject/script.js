@@ -75,7 +75,7 @@ function generateCharts(data) {
     const ctx3 = document.getElementById('stock-chart3').getContext('2d'); 
     const ctx4 = document.getElementById('stock-chart4').getContext('2d'); 
     
-    // Destroy previous chart if it exists
+    // Destroy previous charts if they exist:
     if (window.bookValueChart) {
         window.bookValueChart.destroy();
     }
