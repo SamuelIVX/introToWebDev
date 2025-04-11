@@ -85,6 +85,16 @@
 
 /* NEWS SECTION */
 
+.filters{
+    display: flex;
+    align-items: center; 
+    gap: 10px; 
+}
+
+.filter-icon{
+    margin-left: 35%;
+}
+
 /* @keyframes fadeInUp {
     from {
       opacity: 0;
