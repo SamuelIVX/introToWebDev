@@ -89,10 +89,11 @@
     display: flex;
     align-items: center; 
     gap: 10px; 
+    max-width: 70%;
 }
 
 .filter-icon{
-    margin-left: 35%;
+    margin-left: 50%;
 }
 
 /* @keyframes fadeInUp {

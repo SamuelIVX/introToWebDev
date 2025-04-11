@@ -35,13 +35,14 @@
         <div align=center class="container">
             <h1 class="display-4" id="title"> <b style="color:lightskyblue">BREAKING FINANCIAL NEWS</b></h1>
         </div>
-        
+
         <div class="filters">
-            <img class="filter-icon" src="https://icons.veryicon.com/png/o/miscellaneous/alicloud-official-website/filter-32.png" height="40" width="40">
+            <img class="filter-icon" src="https://icons.veryicon.com/png/o/miscellaneous/alicloud-official-website/filter-32.png" height="35" width="35">
             <div class="filter-options">
-                <button class="btn btn-outline-info">Top News</button>
-                <button class="btn btn-outline-info">Business</button>
-                <button class="btn btn-outline-info">Technology</button>
+                <button class="btn btn-outline-info" onClick="fetchNewsData('generalNews')">General News</button>
+                <button class="btn btn-outline-info" onClick="fetchNewsData('forex')">Forex</button>
+                <button class="btn btn-outline-info" onClick="fetchNewsData('crypto')">Crypto</button>
+                <button class="btn btn-outline-info" onClick="fetchNewsData('merger')">Merger</button>
             </div>
         </div>
         <div class="content-grid" id="api-content">
