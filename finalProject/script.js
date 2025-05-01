@@ -9,7 +9,6 @@ const api_key = "cvnh48hr01qq3c7fa2vgcvnh48hr01qq3c7fa300";
 // });
 
 async function fetchNewsData(filterType){
-//   const api_key = "cvnh48hr01qq3c7fa2vgcvnh48hr01qq3c7fa300";
 //   const url = `https://finnhub.io/api/v1/news?category=${filterType}&token=${api_key}`;
 
 //   // Create and return a Promise
@@ -51,7 +50,6 @@ async function fetchNewsData(filterType){
 //         }
 //     );
 
-    // const api_key = "cvnh48hr01qq3c7fa2vgcvnh48hr01qq3c7fa300";
     const url = `https://finnhub.io/api/v1/news?category=${filterType}&token=${api_key}`;
     const response = await fetch(url);
     const data = await response.json();
@@ -73,17 +71,17 @@ async function fetchNewsData(filterType){
 fetchNewsData()
 
 async function fetchStockData(){
-    // const api_key = "cvnh48hr01qq3c7fa2vgcvnh48hr01qq3c7fa300";
     const symbol = document.getElementById("input").value.toUpperCase();
     const url = `https://finnhub.io/api/v1/stock/metric?symbol=${symbol}&metric=all&token=${api_key}`;
     const response = await fetch(url);
     const data = await response.json();
     const currentDividendYieldTTM = data?.metric?.currentDividendYieldTTM != null 
                                     ? data.metric.currentDividendYieldTTM.toFixed(2) + "%" 
-                                    : 'N/A';
+                                    : 'N/A'; // Sometimes this value DNE for some stocks, throwing an error in my inline html
+
+// <div class="stock-metrics-container" style="background-color:hsl(210, 100%, 98.5%)"> </div>
                                     
-    let output1 = `<div class="stock-metrics-container" style="background-color:hsl(210, 100%, 98.5%)"> 
-                        <span class="stock-symbol">${data.symbol}</span> <span class="stock-subtitle">- Key Analytics</span>                      
+    let output1 = `     <span class="stock-symbol">${data.symbol}</span> <span class="stock-subtitle">- Key Analytics</span>                      
                         <p class="metric-summary">
                             <span class="stock-metric-title">52-Week High:</span> 
                             <span class="stock-metric">$${data.metric["52WeekHigh"].toFixed(2)}</span> 
@@ -104,7 +102,7 @@ async function fetchStockData(){
                             <span class="stock-metric-title" style="margin-left: 20%;">Dividend Yield(TTM):</span>
                             <span class="stock-metric">${currentDividendYieldTTM}</span>
                         </p>
-                    </div>`;
+                    `;
 
     document.getElementById("stocks-content").innerHTML = output1;
     generateCharts(data) // I decided to call the generateCharts() function within this function so I don't call the API multiple times.
