@@ -1,11 +1,12 @@
+const api_key = "cvnh48hr01qq3c7fa2vgcvnh48hr01qq3c7fa300";
 /*
     Before running these functions, I want to make sure the browser is fully loaded and the HTML file is completely parsed.
     That way, I prevent my functions from selecting HTML elements that are not fully loaded yet.
 */
-document.addEventListener('DOMContentLoaded', () => {
-    fetchStockData();
-    fetchNewsData();
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//     fetchStockData();
+//     fetchNewsData();
+// });
 
 async function fetchNewsData(filterType){
 //   const api_key = "cvnh48hr01qq3c7fa2vgcvnh48hr01qq3c7fa300";
@@ -50,7 +51,7 @@ async function fetchNewsData(filterType){
 //         }
 //     );
 
-    const api_key = "cvnh48hr01qq3c7fa2vgcvnh48hr01qq3c7fa300";
+    // const api_key = "cvnh48hr01qq3c7fa2vgcvnh48hr01qq3c7fa300";
     const url = `https://finnhub.io/api/v1/news?category=${filterType}&token=${api_key}`;
     const response = await fetch(url);
     const data = await response.json();
@@ -72,7 +73,7 @@ async function fetchNewsData(filterType){
 fetchNewsData()
 
 async function fetchStockData(){
-    const api_key = "cvnh48hr01qq3c7fa2vgcvnh48hr01qq3c7fa300";
+    // const api_key = "cvnh48hr01qq3c7fa2vgcvnh48hr01qq3c7fa300";
     const symbol = document.getElementById("input").value.toUpperCase();
     const url = `https://finnhub.io/api/v1/stock/metric?symbol=${symbol}&metric=all&token=${api_key}`;
     const response = await fetch(url);
