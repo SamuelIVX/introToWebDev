@@ -55,7 +55,7 @@
     margin: 0 auto;
 }
 
-.status{
+.stock-status{
     font-weight: bold;
     color: green;
     font-family: "Open Sans", sans-serif;
@@ -127,6 +127,18 @@
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     border: 3px solid lightskyblue;
+}
+
+.news-status{
+    background-color: hsl(210, 100%, 98.5%);
+    text-align: center;
+    padding: 10px;
+    max-width: 300px;
+    margin: 0 auto;
+    font-weight: bold;
+    color: green;
+    font-family: "Open Sans", sans-serif;
+    margin-top: 2%;
 }
 
 .image{
