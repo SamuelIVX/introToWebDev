@@ -252,6 +252,8 @@ async function fetchNewsData(filterType){
         const url = `https://finnhub.io/api/v1/news?category=${filterType}&token=${api_key}`;
         const response = await fetch(url);
         const data = await response.json();
+
+        document.getElementById("news-para").innerHTML = "<p></p>"; // After a filter is applied, the message about "Applying a filter" should be removed so I will will reset the p-tag
         
         let output = "";
         data.slice(0, 30).forEach(key => {
@@ -267,6 +269,6 @@ async function fetchNewsData(filterType){
         document.getElementById("api-content").innerHTML = output;
         } catch (e) {
             let errorOutput = `<p style="color:red;color:red;font-weight:bold">Failed to fetch news articles...</p>`
-            document.getElementById("stocks-content").innerHTML = errorOutput;
+            document.getElementById("news-para").innerHTML = errorOutput;
         }
     }
