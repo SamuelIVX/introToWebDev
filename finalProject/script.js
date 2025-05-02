@@ -1,76 +1,7 @@
 const api_key = "cvnh48hr01qq3c7fa2vgcvnh48hr01qq3c7fa300";
-/*
-    Before running these functions, I want to make sure the browser is fully loaded and the HTML file is completely parsed.
-    That way, I prevent my functions from selecting HTML elements that are not fully loaded yet.
-*/
-// document.addEventListener('DOMContentLoaded', () => {
-//     fetchStockData();
-//     fetchNewsData();
-// });
-
-async function fetchNewsData(filterType){
-//   const url = `https://finnhub.io/api/v1/news?category=${filterType}&token=${api_key}`;
-
-//   // Create and return a Promise
-//   const newsPromise = new Promise((resolve, reject) => {
-//     fetch(url)
-//       .then(response => {
-//         if (!response.ok) {
-//           throw new Error("Network response was not ok");
-//         }
-//         return response.json();
-//       })
-//       .then(data => {
-//         let output = "";
-//         data.slice(0, 30).forEach(key => {
-//                 output += `
-//                     <div class="content-container" style="background-color:hsl(210, 100%, 98.5%)">
-//                         <a href="${key.url}"><img src="${key.image}" alt="" height="240" width="370" class="image"></a>
-//                         <h5 class="headline"><b>${key.headline}</b></h5>
-//                         <p class="summary" style="color:#665">${key.summary}</p>
-//                         <p class="source"><b>${key.source}</b></p>
-//                     </div>
-//                 `;
-//             });
-//         resolve(output); // Resolve with the HTML string
-//       })
-//       .catch(error => {
-//         reject(error); // Reject if there's an error
-//       });
-//   });
-
-//     // Use the Promise
-//     newsPromise.then(
-//         html => {
-//         document.getElementById("api-content").innerHTML = html;
-//         },
-//         error => {
-//         console.error("Error fetching news:", error);
-//         document.getElementById("api-content").innerHTML = "Failed to load news.";
-//         }
-//     );
-
-    const url = `https://finnhub.io/api/v1/news?category=${filterType}&token=${api_key}`;
-    const response = await fetch(url);
-    const data = await response.json();
-    
-    let output = "";
-    data.slice(0, 30).forEach(key => {
-        output += `
-            <div class="content-container" style="background-color:hsl(210, 100%, 98.5%)">
-                <a href="${key.url}"><img src="${key.image}" alt="" height="240" width="370" class="image"></a>
-                <h5 class="headline"><b>${key.headline}</b></h5>
-                <p class="summary" style="color:#665">${key.summary}</p>
-                <p class="source"><b>${key.source}</b></p>
-            </div>
-        `;
-    });
-    
-    document.getElementById("api-content").innerHTML = output;
-}
-fetchNewsData()
 
 async function fetchStockData(){
+    try{
     const symbol = document.getElementById("input").value.toUpperCase();
     const url = `https://finnhub.io/api/v1/stock/metric?symbol=${symbol}&metric=all&token=${api_key}`;
     const response = await fetch(url);
@@ -78,8 +9,6 @@ async function fetchStockData(){
     const currentDividendYieldTTM = data?.metric?.currentDividendYieldTTM != null 
                                     ? data.metric.currentDividendYieldTTM.toFixed(2) + "%" 
                                     : 'N/A'; // Sometimes this value DNE for some stocks, throwing an error in my inline html
-
-// <div class="stock-metrics-container" style="background-color:hsl(210, 100%, 98.5%)"> </div>
                                     
     let output1 = `     <span class="stock-symbol">${data.symbol}</span> <span class="stock-subtitle">- Key Analytics</span>                      
                         <p class="metric-summary">
@@ -106,8 +35,24 @@ async function fetchStockData(){
 
     document.getElementById("stocks-content").innerHTML = output1;
     generateCharts(data) // I decided to call the generateCharts() function within this function so I don't call the API multiple times.
+    } catch (e) {
+        let errorOutput = `<p style="color:red;color:red;font-weight:bold">Failed to fetch stock data...</p>`
+        document.getElementById("stocks-content").innerHTML = errorOutput;
+        // Destroy previous charts if they exist:
+        if (window.bookValueChart) {
+            window.bookValueChart.destroy();
+        }
+        if (window.EarningsPerShareChart) {
+            window.EarningsPerShareChart.destroy();
+        }
+        if (window.SalesPerShareChart) {
+            window.SalesPerShareChart.destroy();
+        }
+        if (window.grossMarginChart) {
+            window.grossMarginChart.destroy();
+        }
+    }
 }
-fetchStockData()
 
 function generateCharts(data) {
     if (!data.series?.annual) return;
@@ -260,3 +205,68 @@ function generateCharts(data) {
         },
     })
 }
+
+async function fetchNewsData(filterType){
+    //   const url = `https://finnhub.io/api/v1/news?category=${filterType}&token=${api_key}`;
+    
+    //   // Create and return a Promise
+    //   const newsPromise = new Promise((resolve, reject) => {
+    //     fetch(url)
+    //       .then(response => {
+    //         if (!response.ok) {
+    //           throw new Error("Network response was not ok");
+    //         }
+    //         return response.json();
+    //       })
+    //       .then(data => {
+    //         let output = "";
+    //         data.slice(0, 30).forEach(key => {
+    //                 output += `
+    //                     <div class="content-container" style="background-color:hsl(210, 100%, 98.5%)">
+    //                         <a href="${key.url}"><img src="${key.image}" alt="" height="240" width="370" class="image"></a>
+    //                         <h5 class="headline"><b>${key.headline}</b></h5>
+    //                         <p class="summary" style="color:#665">${key.summary}</p>
+    //                         <p class="source"><b>${key.source}</b></p>
+    //                     </div>
+    //                 `;
+    //             });
+    //         resolve(output); // Resolve with the HTML string
+    //       })
+    //       .catch(error => {
+    //         reject(error); // Reject if there's an error
+    //       });
+    //   });
+    
+    //     // Use the Promise
+    //     newsPromise.then(
+    //         html => {
+    //         document.getElementById("api-content").innerHTML = html;
+    //         },
+    //         error => {
+    //         console.error("Error fetching news:", error);
+    //         document.getElementById("api-content").innerHTML = "Failed to load news.";
+    //         }
+    //     );
+    
+        try{
+        const url = `https://finnhub.io/api/v1/news?category=${filterType}&token=${api_key}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        let output = "";
+        data.slice(0, 30).forEach(key => {
+            output += `
+                <div class="content-container" style="background-color:hsl(210, 100%, 98.5%)">
+                    <a href="${key.url}"><img src="${key.image}" alt="" height="240" width="370" class="image"></a>
+                    <h5 class="headline"><b>${key.headline}</b></h5>
+                    <p class="summary" style="color:#665">${key.summary}</p>
+                    <p class="source"><b>${key.source}</b></p>
+                </div>
+            `;
+        });
+        document.getElementById("api-content").innerHTML = output;
+        } catch (e) {
+            let errorOutput = `<p style="color:red;color:red;font-weight:bold">Failed to fetch news articles...</p>`
+            document.getElementById("stocks-content").innerHTML = errorOutput;
+        }
+    }

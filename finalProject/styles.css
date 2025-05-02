@@ -55,6 +55,12 @@
     margin: 0 auto;
 }
 
+.status{
+    font-weight: bold;
+    color: green;
+    font-family: "Open Sans", sans-serif;
+}
+
 .stock-symbol{
     text-transform: uppercase;
     font-size: 20px; 
