@@ -57,6 +57,7 @@ async function fetchStockData(){
 function generateCharts(data) {
     if (!data.series?.annual) return;
 
+    // Will be used by the pie charts
     let colors = ['#32648C33', 'rgba(180, 50, 50, 0.2)', 'rgba(40, 140, 80, 0.2)', 'rgba(200, 170, 50, 0.2)', 'rgba(190, 80, 140, 0.2)', 'rgba(120, 80, 50, 0.2)', 
         'rgba(200, 100, 40, 0.2)', 'rgba(40, 40, 40, 0.2)', 'rgba(110, 180, 40, 0.2)', 'rgba(110, 60, 140, 0.2)	'];
 
