@@ -1,6 +1,7 @@
 {
     "extends": [
         "config:recommended",
+        "helpers:pinGitHubActionDigests",
         ":semanticCommits"
     ],
     "timezone": "America/New_York",
@@ -14,6 +15,7 @@
         "dependencies"
     ],
     "dependencyDashboard": true,
+    "platformAutomerge": true,
     "enabledManagers": [
         "npm",
         "github-actions",
@@ -26,7 +28,7 @@
             ],
             "groupName": "github-actions",
             "automerge": true,
-            "automergeType": "branch"
+            "automergeType": "pr"
         },
         {
             "matchManagers": [
@@ -40,7 +42,7 @@
                 "patch"
             ],
             "automerge": true,
-            "automergeType": "branch"
+            "automergeType": "pr"
         },
         {
             "matchManagers": [
@@ -53,7 +55,7 @@
                 "patch"
             ],
             "automerge": true,
-            "automergeType": "branch"
+            "automergeType": "pr"
         },
         {
             "matchManagers": [
@@ -83,13 +85,14 @@
                 "npm"
             ],
             "separateMajorMinor": true
-        },
-        {}
+        }
     ],
     "lockFileMaintenance": {
         "enabled": true,
         "schedule": [
             "at any time"
-        ]
+        ],
+        "automerge": true,
+        "automergeType": "pr"
     }
 }
