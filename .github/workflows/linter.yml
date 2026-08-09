@@ -7,6 +7,14 @@ on:
     pull_request: 
         branches: [ main]
 
+concurrency:
+    group: lint-${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+permissions:
+    contents: read
+    statuses: write
+
 jobs:
     lint:
         name: Lint Code Base
@@ -14,24 +22,26 @@ jobs:
 
         steps:
             - name: Checkout Code
-              uses: actions/checkout@v7
+              uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
               with:
-                fetch-depth: 0
+                  fetch-depth: 0
+                  persist-credentials: false
 
             - name: Setup Node.js
-              uses: actions/setup-node@v7
+              uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
               with:
-                node-version: 24
+                  node-version: 24
+                  cache: npm
             
             - name: Install Dependencies
-              run: npm install
+              run: npm ci
 
             - name: Super-Linter
-              uses: super-linter/super-linter@v8.6.0
+              uses: super-linter/super-linter@9e863354e3ff62e0727d37183162c4a88873df41 # v8.6.0
               env:
-                VALIDATE_ALL_CODEBASE: true
-                DEFAULT_BRANCH: main
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                VALIDATE_JAVASCRIPT_ES: true
-                VALIDATE_JSON: true
-                VALIDATE_MARKDOWN: true
+                  VALIDATE_ALL_CODEBASE: true
+                  DEFAULT_BRANCH: main
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  VALIDATE_JAVASCRIPT_ES: true
+                  VALIDATE_JSON: true
+                  VALIDATE_MARKDOWN: true
