@@ -139,8 +139,8 @@ describe("fetchNewsData", () => {
         await window.fetchNewsData("general");
 
         const content = window.document.getElementById("api-content").innerHTML;
-        assert.match(content, /Test Headline/);
-        assert.match(content, /Test Source/);
-        assert.match(content, /http:\/\/example\.com\/a/);
+        assert.ok(content.includes("Test Headline"));
+        assert.ok(content.includes("Test Source"));
+        assert.ok(content.includes("http://example.com/a"));
     });
 });
