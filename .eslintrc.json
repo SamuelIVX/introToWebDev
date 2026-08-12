@@ -13,8 +13,7 @@
     "Chart": "readonly",
     "test": "readonly",
     "describe": "readonly",
-    "before": "readonly",
-    "after": "readonly"
+    "before": "readonly"
   },
   "rules": {
     "no-undef": "error"
