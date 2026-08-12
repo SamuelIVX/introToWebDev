@@ -1,2 +1,5 @@
 node_modules/
-gitignore
+.env
+.env.*
+!.env.example
+finalProject/config.js
