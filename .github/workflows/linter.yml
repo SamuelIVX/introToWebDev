@@ -3,9 +3,9 @@ name: Lint
 
 on:
     push:
-        branches: [ main ]
-    pull_request: 
-        branches: [ main]
+        branches: [main]
+    pull_request:
+        branches: [main]
 
 concurrency:
     group: lint-${{ github.workflow }}-${{ github.ref }}
@@ -39,7 +39,7 @@ jobs:
             - name: Super-Linter
               uses: super-linter/super-linter@9e863354e3ff62e0727d37183162c4a88873df41 # v8.6.0
               env:
-                  VALIDATE_ALL_CODEBASE: true
+                  VALIDATE_ALL_CODEBASE: ${{ github.event_name == 'push' }}
                   DEFAULT_BRANCH: main
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   VALIDATE_JAVASCRIPT_ES: true
