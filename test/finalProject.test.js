@@ -142,7 +142,7 @@ describe("fetchNewsData", () => {
         assert.ok(content.innerHTML.includes("Test Headline"));
         assert.ok(content.innerHTML.includes("Test Source"));
         assert.equal(
-            content.querySelector("a.image").href,
+            content.querySelector("a[href]").href,
             "http://example.com/a",
         );
     });
