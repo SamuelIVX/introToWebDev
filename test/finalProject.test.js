@@ -138,9 +138,12 @@ describe("fetchNewsData", () => {
     test("renders news articles into api-content", async () => {
         await window.fetchNewsData("general");
 
-        const content = window.document.getElementById("api-content").innerHTML;
-        assert.ok(content.includes("Test Headline"));
-        assert.ok(content.includes("Test Source"));
-        assert.ok(content.includes("http://example.com/a"));
+        const content = window.document.getElementById("api-content");
+        assert.ok(content.innerHTML.includes("Test Headline"));
+        assert.ok(content.innerHTML.includes("Test Source"));
+        assert.equal(
+            content.querySelector("a.image").href,
+            "http://example.com/a",
+        );
     });
 });
