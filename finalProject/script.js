@@ -1,5 +1,9 @@
 /* global Chart */
-const api_key = "REDACTED_API_KEY";
+const api_key = window.FINNHUB_API_KEY || "";
+
+if (!api_key) {
+    console.warn("FINNHUB_API_KEY is not set. Add finalProject/config.js (see config.example.js) or set window.FINNHUB_API_KEY.");
+}
 
 async function fetchStockData() {
     try {
