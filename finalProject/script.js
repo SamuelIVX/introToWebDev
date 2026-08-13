@@ -148,7 +148,7 @@ function generateCharts(data) {
         }
     })
 
-    const spsData = data.series.annual.salesPerShare; // Enter the eps array
+    const spsData = data.series.annual.salesPerShare; // Enter the salesPerShare array
     const years3 = spsData.slice(0, 10).map(item => item.period.substring(0, 4)).reverse(); // Only grab the first 10 elements of the array
     const values3 = spsData.slice(0, 10).map(item => item.v.toFixed(2)).reverse(); // Only grab the first 10 elements of the array
 
@@ -174,7 +174,7 @@ function generateCharts(data) {
         },
     })
 
-    const grossMarginData = data.series.annual.grossMargin; // Enter the eps array
+    const grossMarginData = data.series.annual.grossMargin; // Enter the grossMargin array
     const years4 = grossMarginData.slice(0, 10).map(item => item.period.substring(0, 4)).reverse(); // Only grab the first 10 elements of the array
     const values4 = grossMarginData.slice(0, 10).map(item => item.v * 100).reverse(); // Only grab the first 10 elements of the array
 
