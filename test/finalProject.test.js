@@ -1,3 +1,9 @@
+/**
+ * DOM tests for `finalProject/script.js` via jsdom + node:test.
+ * Builds a fake browser window (stocks/news HTML + Chart stub), injects a
+ * fixture Finnhub key, and asserts fetch URL shape, render output, and that
+ * no real API key is hardcoded in the script source.
+ */
 const { test, describe, before } = require("node:test");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
@@ -9,8 +15,22 @@ const scriptSrc = fs.readFileSync(
     "utf8"
 );
 
+/** Fixture key only — not a real Finnhub credential. */
 const TEST_API_KEY = "test-key-1234567890";
 
+/**
+ * Loads a finalProject HTML page into jsdom, injects Chart + Finnhub key,
+ * then evals `script.js` so `fetchStockData` / `fetchNewsData` attach to window.
+ * SECURITY: `apiKey` is a test fixture; production keys must never appear here.
+ * @param {string} htmlFile - Filename under `finalProject/` (e.g. `"stocks.html"`).
+ * @param {string} scriptText - Source of `finalProject/script.js` to eval.
+ * @param {object} [options]
+ * @param {string} [options.apiKey=TEST_API_KEY] - Value assigned to `window.FINNHUB_API_KEY`.
+ * @returns {Window} The jsdom window with script globals attached.
+ * @example
+ * const window = buildDom("stocks.html", scriptSrc);
+ * assert.equal(typeof window.fetchStockData, "function");
+ */
 function buildDom(htmlFile, scriptText, { apiKey = TEST_API_KEY } = {}) {
     const html = fs.readFileSync(
         path.join(__dirname, "../finalProject", htmlFile),

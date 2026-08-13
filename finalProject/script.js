@@ -1,10 +1,33 @@
+/**
+ * Final-project client logic: Finnhub stock metrics + market news, rendered
+ * into the stocks/news pages with Chart.js.
+ * Expects Chart.js as a global (`Chart`) and a Finnhub key on
+ * `window.FINNHUB_API_KEY` (from gitignored `config.js`).
+ * SECURITY: `api_key` is a real Finnhub secret when set — never log it or the
+ * request URLs that embed `token=…`.
+ */
 /* global Chart */
+/**
+ * SECURITY: Finnhub API key from `window.FINNHUB_API_KEY` (config.js). Empty
+ * when unset; do not log this value or URLs that include it as `token`.
+ */
 const api_key = window.FINNHUB_API_KEY || "";
 
 if (!api_key) {
     console.warn("FINNHUB_API_KEY is not set. Add finalProject/config.js (see config.example.js) or set window.FINNHUB_API_KEY.");
 }
 
+/**
+ * Fetches Finnhub stock metrics for the ticker in `#input` and paints them
+ * into `#stocks-content`, then builds the four Chart.js charts.
+ * SECURITY: sends `api_key` as the Finnhub `token` query param — do not log
+ * the request URL.
+ * Preconditions: `#input`, `#stocks-content`, and chart canvases exist in the DOM.
+ * @returns {Promise<void>} Resolves after DOM update (or error markup on failure).
+ * @example
+ * document.getElementById("input").value = "AAPL";
+ * await fetchStockData(); // fills #stocks-content and chart canvases
+ */
 async function fetchStockData() {
     try {
         const symbol = document.getElementById("input").value.toUpperCase();
@@ -59,6 +82,19 @@ async function fetchStockData() {
     }
 }
 
+/**
+ * Builds (or rebuilds) the four Chart.js charts from Finnhub annual series.
+ * Destroys any prior chart instances on `window` before creating new ones.
+ * No-ops when `data.series.annual` is missing.
+ * @param {object} data - Finnhub stock/metric payload (expects `series.annual`).
+ * @param {object} [data.series] - Time-series container from Finnhub.
+ * @param {object} [data.series.annual] - Annual bookValue, eps, salesPerShare, grossMargin arrays.
+ * @returns {void}
+ * @example
+ * generateCharts({
+ *   series: { annual: { bookValue: [{ period: "2024-01-01", v: 20 }], eps: [], salesPerShare: [], grossMargin: [] } }
+ * });
+ */
 function generateCharts(data) {
     if (!data.series?.annual) return;
 
@@ -214,6 +250,17 @@ function generateCharts(data) {
 
 window.fetchStockData = fetchStockData;
 
+/**
+ * Fetches Finnhub market news for `filterType` and renders up to 30 cards
+ * into `#api-content` (clears the filter hint in `#news-para` first).
+ * SECURITY: sends `api_key` as the Finnhub `token` query param — do not log
+ * the request URL.
+ * Preconditions: `#api-content` and `#news-para` exist in the DOM.
+ * @param {string} filterType - Finnhub news category (e.g. `"general"`, `"forex"`).
+ * @returns {Promise<void>} Resolves after DOM update (or error markup on failure).
+ * @example
+ * await fetchNewsData("general"); // fills #api-content with news cards
+ */
 async function fetchNewsData(filterType) {
     try {
         const url = `https://finnhub.io/api/v1/news?category=${filterType}&token=${api_key}`;
