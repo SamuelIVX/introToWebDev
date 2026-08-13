@@ -7,10 +7,7 @@
  * request URLs that embed `token=…`.
  */
 /* global Chart */
-/**
- * SECURITY: Finnhub API key from `window.FINNHUB_API_KEY` (config.js). Empty
- * when unset; do not log this value or URLs that include it as `token`.
- */
+/** SECURITY: Finnhub key from `window.FINNHUB_API_KEY` — empty when unset. */
 const api_key = window.FINNHUB_API_KEY || "";
 
 if (!api_key) {

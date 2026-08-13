@@ -27,6 +27,7 @@ const TEST_API_KEY = "test-key-1234567890";
  * @param {object} [options]
  * @param {string} [options.apiKey=TEST_API_KEY] - Value assigned to `window.FINNHUB_API_KEY`.
  * @returns {Window} The jsdom window with script globals attached.
+ * @throws {Error} If `htmlFile` is missing on disk, or `scriptText` throws when eval'd.
  * @example
  * const window = buildDom("stocks.html", scriptSrc);
  * assert.equal(typeof window.fetchStockData, "function");
